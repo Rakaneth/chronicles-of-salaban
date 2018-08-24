@@ -5,18 +5,18 @@ import java.util.Map;
 
 import com.rakaneth.chronicles.ui.screens.Screen;
 
-import asciiPanel.AsciiPanel;
+
 import lombok.Getter;
 
 public class GameController {
   @Getter private Screen screen;
   private Map<String, Screen> screens;
-  @Getter private AsciiPanel map;
-  @Getter private AsciiPanel stats;
-  @Getter private AsciiPanel msgs;
-  @Getter private AsciiPanel info;
+  @Getter private Terminal map;
+  @Getter private Terminal stats;
+  @Getter private Terminal msgs;
+  @Getter private Terminal info;
   
-  public GameController(AsciiPanel map, AsciiPanel stats, AsciiPanel msgs, AsciiPanel info) {
+  public GameController(Terminal map, Terminal stats, Terminal msgs, Terminal info) {
     screens = new HashMap<>();
     this.map = map;
     this.stats = stats;

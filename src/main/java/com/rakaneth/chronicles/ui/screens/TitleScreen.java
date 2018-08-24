@@ -1,5 +1,7 @@
 package com.rakaneth.chronicles.ui.screens;
 
+import com.rakaneth.chronicles.ui.Sprite;
+
 public class TitleScreen extends Screen {
 
   public TitleScreen() {
@@ -11,6 +13,8 @@ public class TitleScreen extends Screen {
     controller.getStats().write("Stats", 0, 0);
     controller.getMsgs().write("Messages", 0, 0);
     controller.getInfo().write("Info", 0, 0);
+    controller.getMap().draw(Sprite.WALL_STONE, 0, 0, false);
+    controller.getMap().draw(Sprite.FLOOR_STONE, 1, 0, true);
   }
 
   @Override

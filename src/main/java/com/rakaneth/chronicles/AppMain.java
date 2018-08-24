@@ -8,9 +8,9 @@ import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 
 import com.rakaneth.chronicles.ui.GameController;
+import com.rakaneth.chronicles.ui.Terminal;
 import com.rakaneth.chronicles.ui.screens.TitleScreen;
 
-import asciiPanel.AsciiPanel;
 import lombok.Getter;
 
 public class AppMain extends JFrame implements KeyListener {
@@ -26,10 +26,10 @@ public class AppMain extends JFrame implements KeyListener {
   private final int INFOH = 10;
 
   public AppMain() {
-    AsciiPanel map = new AsciiPanel(MAPW, MAPH);
-    AsciiPanel info = new AsciiPanel(INFOW, INFOH);
-    AsciiPanel msgs = new AsciiPanel(MSGW, MSGH);
-    AsciiPanel stats = new AsciiPanel(STATW, STATH);
+    Terminal map = new Terminal(MAPW, MAPH);
+    Terminal info = new Terminal(INFOW, INFOH);
+    Terminal msgs = new Terminal(MSGW, MSGH);
+    Terminal stats = new Terminal(STATW, STATH);
     controller = new GameController(map, stats, msgs, info);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     GridBagLayout gb = new GridBagLayout();
@@ -43,7 +43,7 @@ public class AppMain extends JFrame implements KeyListener {
     pack();
   }
 
-  private void setPanel(AsciiPanel panel, GridBagLayout gb,
+  private void setPanel(Terminal panel, GridBagLayout gb,
       GridBagConstraints constraints, int x, int y) {
     constraints.gridx = x;
     constraints.gridy = y;

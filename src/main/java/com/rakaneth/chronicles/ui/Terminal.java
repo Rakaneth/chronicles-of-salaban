@@ -22,4 +22,8 @@ public class Terminal extends AsciiPanel {
     
     write(s.getGlyph(), x, y, fg, bg);
   }
+  
+  public void draw(Sprite s, int x, int y) {
+    draw(s, x, y, false);
+  }
 }

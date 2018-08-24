@@ -14,7 +14,7 @@ public class TitleScreen extends Screen {
     controller.getMsgs().write("Messages", 0, 0);
     controller.getInfo().write("Info", 0, 0);
     controller.getMap().draw(Sprite.WALL_STONE, 0, 0, false);
-    controller.getMap().draw(Sprite.FLOOR_STONE, 1, 0, true);
+    controller.getMap().draw(Sprite.FLOOR_STONE, 1, 0, false);
   }
 
   @Override

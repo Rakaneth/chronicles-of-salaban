@@ -6,9 +6,9 @@ import lombok.Getter;
 
 public enum Sprite {
   NONE('\u0000', null, null),
-  FLOOR_STONE('.', Color.WHITE, Color.GRAY),
-  WALL_STONE('#', Color.WHITE, Color.GRAY),
-  PLAYER('@', Color.WHITE, null);
+  FLOOR_STONE('.', Palette.WHITE, Palette.DARK_GREY),
+  WALL_STONE('#', Palette.WHITE, Palette.GREY),
+  PLAYER('@', Palette.WHITE, Palette.BLACK);
   
   @Getter private char glyph;
   @Getter private Color FG;

@@ -26,9 +26,10 @@ public class AppMain extends JFrame implements KeyListener {
   private final int INFOH = 10;
 
   public AppMain() {
-    AsciiPanel map = new AsciiPanel(MAPW, MAPH),
-        info = new AsciiPanel(INFOW, INFOH), msgs = new AsciiPanel(MSGW, MSGH),
-        stats = new AsciiPanel(STATW, STATH);
+    AsciiPanel map = new AsciiPanel(MAPW, MAPH);
+    AsciiPanel info = new AsciiPanel(INFOW, INFOH);
+    AsciiPanel msgs = new AsciiPanel(MSGW, MSGH);
+    AsciiPanel stats = new AsciiPanel(STATW, STATH);
     controller = new GameController(map, stats, msgs, info);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     GridBagLayout gb = new GridBagLayout();

@@ -25,7 +25,7 @@ public class TitleScreen extends Screen {
     controller.getMsgs().border();
     controller.getInfo().border();
     controller.getMap().draw(testMap, testCoord);
-    controller.getMap().drawOnMap(Sprite.PLAYER, testMap, testCoord, testCoord);
+    controller.getMap().drawOnMap(Sprite.PLAYER, testMap, testCoord);
   }
 
   @Override

@@ -111,4 +111,8 @@ public class Terminal extends AsciiPanel {
       write(s.getGlyph(), x, y, s.getFG(), floor.getBG());
     }
   }
+  
+  public void drawOnMap(Sprite s, GameMap m, Coord followPt) {
+    drawOnMap(s, m, followPt, followPt);
+  }
 }

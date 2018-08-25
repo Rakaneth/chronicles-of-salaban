@@ -1,9 +1,12 @@
 package com.rakaneth.chronicles.ui.screens;
 
+import java.awt.event.KeyEvent;
+
 import com.rakaneth.chronicles.engine.map.GameMap;
 import com.rakaneth.chronicles.engine.map.MapBuilder;
 import com.rakaneth.chronicles.ui.Sprite;
 
+import squidpony.squidgrid.Direction;
 import squidpony.squidmath.Coord;
 
 public class TitleScreen extends Screen {
@@ -27,9 +30,19 @@ public class TitleScreen extends Screen {
 
   @Override
   public void handleKeys(int keyCode, boolean shift) {
-    System.out.println(String.format("%d was pressed", keyCode));
-    if (shift) {
-      System.out.println("Shift is down.");
+    switch (keyCode) {
+    case KeyEvent.VK_UP:
+      testCoord = testCoord.translate(Direction.UP);
+      break;
+    case KeyEvent.VK_DOWN:
+      testCoord = testCoord.translate(Direction.DOWN);
+      break;
+    case KeyEvent.VK_LEFT:
+      testCoord = testCoord.translate(Direction.LEFT);
+      break;
+    case KeyEvent.VK_RIGHT:
+      testCoord = testCoord.translate(Direction.RIGHT);
+      break;
     }
   }
 

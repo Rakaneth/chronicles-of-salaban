@@ -106,8 +106,9 @@ public class Terminal extends AsciiPanel {
     Coord cm = m.cam(center, getWidthInCharacters(), getHeightInCharacters());
     int x = pt.x - cm.x;
     int y = pt.y - cm.y;
+    Sprite floor = m.getSprite(pt);
     if (inBounds(x, y)) {
-      draw(s, x, y);
+      write(s.getGlyph(), x, y, s.getFG(), floor.getBG());
     }
   }
 }

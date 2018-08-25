@@ -5,8 +5,9 @@ import java.util.Map;
 
 import com.rakaneth.chronicles.ui.screens.Screen;
 
-
 import lombok.Getter;
+import squidpony.squidmath.RNG;
+import squidpony.squidmath.StatefulRNG;
 
 public class GameController {
   @Getter private Screen screen;
@@ -15,16 +16,20 @@ public class GameController {
   @Getter private Terminal stats;
   @Getter private Terminal msgs;
   @Getter private Terminal info;
-  
-  public GameController(Terminal map, Terminal stats, Terminal msgs, Terminal info) {
+  @Getter private RNG RNG;
+
+  public GameController(Terminal map, Terminal stats, Terminal msgs,
+      Terminal info) {
     screens = new HashMap<>();
     this.map = map;
     this.stats = stats;
     this.msgs = msgs;
     this.info = info;
     this.screen = null;
+    RNG = new StatefulRNG(0xDEADBEEF); // TODO: remove seed to test true
+                                       // randomness
   }
-  
+
   public void refresh() {
     map.clear();
     stats.clear();
@@ -33,13 +38,13 @@ public class GameController {
     screen.render();
   }
 
-  public void register(Screen ...screens) {
-    for (Screen s: screens) {
+  public void register(Screen... screens) {
+    for (Screen s : screens) {
       s.setController(this);
       this.screens.put(s.getID(), s);
     }
   }
-  
+
   public void switchScreen(String screenID) {
     Screen s = screens.get(screenID);
     if (screen != null) {

@@ -10,9 +10,9 @@ public class TitleScreen extends Screen {
   @Override
   public void render() {
     controller.getMap().writeCenter("Chronicles of Salaban", 20);
-    controller.getStats().write("Stats", 0, 0);
-    controller.getMsgs().write("Messages", 0, 0);
-    controller.getInfo().write("Info", 0, 0);
+    controller.getStats().border();
+    controller.getMsgs().border();
+    controller.getInfo().border();
     controller.getMap().draw(Sprite.WALL_STONE, 0, 0, false);
     controller.getMap().draw(Sprite.FLOOR_STONE, 1, 0, false);
   }

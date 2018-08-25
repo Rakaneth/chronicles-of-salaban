@@ -27,9 +27,9 @@ public class AppMain extends JFrame implements KeyListener {
 
   public AppMain() {
     Terminal map = new Terminal(MAPW, MAPH);
-    Terminal info = new Terminal(INFOW, INFOH);
-    Terminal msgs = new Terminal(MSGW, MSGH);
-    Terminal stats = new Terminal(STATW, STATH);
+    Terminal info = new Terminal(INFOW, INFOH, "Info");
+    Terminal msgs = new Terminal(MSGW, MSGH, "Messages");
+    Terminal stats = new Terminal(STATW, STATH, "Stats");
     controller = new GameController(map, stats, msgs, info);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     GridBagLayout gb = new GridBagLayout();

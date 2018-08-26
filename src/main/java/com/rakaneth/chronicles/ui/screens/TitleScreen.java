@@ -20,16 +20,13 @@ public class TitleScreen extends Screen {
 
   @Override
   public void render() {
-    controller.getMap().writeCenter("Chronicles of Salaban", 20);
-    controller.getStats().border();
-    controller.getMsgs().border();
-    controller.getInfo().border();
     controller.getMap().draw(testMap, testCoord);
     controller.getMap().drawOnMap(Sprite.PLAYER, testMap, testCoord);
   }
 
   @Override
   public void handleKeys(int keyCode, boolean shift) {
+    //TODO: remove when action loop/commands are implemented
     switch (keyCode) {
     case KeyEvent.VK_UP:
       testCoord = testCoord.translate(Direction.UP);

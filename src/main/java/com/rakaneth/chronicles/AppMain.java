@@ -39,6 +39,7 @@ public class AppMain extends JFrame implements KeyListener {
     setPanel(stats, gb, constraints, 1, 0);
     setPanel(msgs, gb, constraints, 0, 1);
     setPanel(info, gb, constraints, 1, 1);
+    setTitle("Chronicles of Salaban");
     addKeyListener(this);
     pack();
   }

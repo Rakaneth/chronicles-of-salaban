@@ -26,15 +26,18 @@ public class GameController {
     this.msgs = msgs;
     this.info = info;
     this.screen = null;
-    RNG = new StatefulRNG(0xDEADBEEF); // TODO: remove seed to test true
-                                       // randomness
+    //TODO: remove seed to test randomness
+    RNG = new StatefulRNG(0xDEADBEEF); 
   }
-
+  
   public void refresh() {
     map.clear();
     stats.clear();
     msgs.clear();
     info.clear();
+    stats.border();
+    msgs.border();
+    info.border();
     screen.render();
   }
 

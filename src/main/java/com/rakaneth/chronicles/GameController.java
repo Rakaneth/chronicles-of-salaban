@@ -5,7 +5,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import com.rakaneth.chronicles.engine.map.GameMap;
 import com.rakaneth.chronicles.entity.Actor;
 import com.rakaneth.chronicles.entity.actions.Action;
 import com.rakaneth.chronicles.entity.actions.ActionResult;
@@ -27,6 +29,7 @@ public class GameController {
   private int ticks;
   @Getter private int turns;
   private List<Actor> actors;
+  private GameMap curMap;
 
   public GameController(Terminal map, Terminal stats, Terminal msgs,
       Terminal info) {
@@ -41,6 +44,7 @@ public class GameController {
     ticks = 0;
     turns = 0;
     actors = new ArrayList<>();
+    curMap = null;
   }
 
   public void refresh() {
@@ -73,35 +77,54 @@ public class GameController {
 
   public void process() {
     // TODO: Process stuff here
-    actors.stream()
-          .sorted(Comparator.reverseOrder())
-          .forEach(actor -> {
-            actor.gainEnergy();
-            if (actor.canAct()) {
-              Action action;
-              ActionResult result;
-              action = actor.getNextAction();
-              while (true) {
-                result = action.perform();
-                if (result.succeeded()) {
-                  actor.changeEnergy(-action.getCost());
-                  break;
-                } else if (result.getAlternate() != null) {
-                  action = result.getAlternate();
-                } else {
-                  return;
-                }
-              }
-            }
-          });
-    if (++ticks == 10) {
-      // all actors perform upkeep
+    curActors().stream()
+               .sorted(Comparator.reverseOrder())
+               .forEach(actor -> {
+                 actor.gainEnergy();
+                 if (actor.canAct()) {
+                   Action action;
+                   ActionResult result;
+                   action = actor.getNextAction();
+                   while (true) {
+                     result = action.perform();
+                     if (result.succeeded()) {
+                       actor.changeEnergy(-action.getCost());
+                       break;
+                     } else if (result.getAlternate() != null) {
+                       action = result.getAlternate();
+                     } else {
+                       return;
+                     }
+                   }
+                 }
+               });
+    ticks = (ticks + 1) % 10;
+    if (ticks == 0) {
+      for (Actor a : curActors()) {
+        a.upkeep();
+      }
       turns++;
-      ticks = 0;
     }
   }
 
   public Actor player() {
-    return actors.stream().filter(a -> a.isPlayer()).findFirst().get();
+    return actors.stream()
+                 .filter(a -> a.isPlayer())
+                 .findFirst()
+                 .get();
+  }
+
+  private List<Actor> curActors() {
+    return actors.stream()
+                 .filter(f -> f.getMapID() == curMap.getID())
+                 .collect(Collectors.toList());
+  }
+
+  public void addActor(Actor a) {
+    actors.add(a);
+  }
+
+  public void removeActor(Actor a) {
+    actors.remove(a);
   }
 }

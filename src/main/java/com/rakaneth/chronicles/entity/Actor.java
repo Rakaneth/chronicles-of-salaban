@@ -3,10 +3,12 @@ package com.rakaneth.chronicles.entity;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.rakaneth.chronicles.engine.map.GameMap;
 import com.rakaneth.chronicles.entity.actions.Action;
 
 import lombok.Getter;
 import lombok.Setter;
+import squidpony.squidmath.Coord;
 
 public class Actor implements Upkeep, Comparable<Actor> {
   private Map<String, Stat> stats;
@@ -16,6 +18,8 @@ public class Actor implements Upkeep, Comparable<Actor> {
   @Getter private boolean player;
   @Getter @Setter private Action nextAction;
   private static final int REQ_ACT = 10;
+  @Getter @Setter private Coord pos;
+  @Getter private String mapID;
 
   Actor(String id, String name, boolean isPlayer) {
     ID = id;
@@ -32,6 +36,7 @@ public class Actor implements Upkeep, Comparable<Actor> {
       }
     };
     player = isPlayer;
+    pos = Coord.get(0, 0);
   }
 
   Actor(String id, String name) {
@@ -94,6 +99,10 @@ public class Actor implements Upkeep, Comparable<Actor> {
     Integer thisSpeed = this.getStat("Speed");
     Integer otherSpeed = o.getStat("Speed");
     return thisSpeed.compareTo(otherSpeed);
+  }
+
+  public void setMap(GameMap m) {
+    mapID = m.getID();
   }
 
 }

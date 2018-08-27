@@ -12,7 +12,8 @@ public enum Sprite {
   WATER_DEEP(' ', Palette.WHITE, Palette.WATER_DEEP),
   WATER_SHALLOW(' ', Palette.WHITE, Palette.WATER_SHALLOW),
   DOOR_CLOSED('+', Palette.WHITE, Palette.WOOD),
-  BRIDGE(' ', null, Palette.WOOD);
+  BRIDGE(' ', Palette.WHITE, Palette.WOOD),
+  DOOR_OPEN(' ', Palette.WHITE, Palette.WOOD);
 
   @Getter private char glyph;
   @Getter private Color FG;

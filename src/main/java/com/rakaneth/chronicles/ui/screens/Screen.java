@@ -1,6 +1,6 @@
 package com.rakaneth.chronicles.ui.screens;
 
-import com.rakaneth.chronicles.ui.GameController;
+import com.rakaneth.chronicles.GameController;
 
 import lombok.Getter;
 

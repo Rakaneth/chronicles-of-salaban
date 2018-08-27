@@ -7,7 +7,6 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 
-import com.rakaneth.chronicles.ui.GameController;
 import com.rakaneth.chronicles.ui.Terminal;
 import com.rakaneth.chronicles.ui.screens.TitleScreen;
 
@@ -45,7 +44,7 @@ public class AppMain extends JFrame implements KeyListener {
   }
 
   private void setPanel(Terminal panel, GridBagLayout gb,
-      GridBagConstraints constraints, int x, int y) {
+                        GridBagConstraints constraints, int x, int y) {
     constraints.gridx = x;
     constraints.gridy = y;
     gb.setConstraints(panel, constraints);
@@ -71,6 +70,7 @@ public class AppMain extends JFrame implements KeyListener {
 
   public void keyPressed(KeyEvent e) {
     controller.getScreen().handleKeys(e.getKeyCode(), e.isShiftDown());
+    controller.process();
     repaint();
   }
 

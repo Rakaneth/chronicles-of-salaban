@@ -20,13 +20,17 @@ public class TitleScreen extends Screen {
 
   @Override
   public void render() {
-    controller.getMap().draw(testMap, testCoord);
-    controller.getMap().drawOnMap(Sprite.PLAYER, testMap, testCoord);
+    controller.getMap()
+              .draw(testMap, testCoord);
+    controller.getMap()
+              .drawOnMap(Sprite.PLAYER, testMap, testCoord);
+    controller.getStats()
+              .write(String.valueOf(controller.getTurns()), 1, 1);
   }
 
   @Override
   public void handleKeys(int keyCode, boolean shift) {
-    //TODO: remove when action loop/commands are implemented
+    // TODO: remove when action loop/commands are implemented
     switch (keyCode) {
     case KeyEvent.VK_UP:
       testCoord = testCoord.translate(Direction.UP);
@@ -46,7 +50,9 @@ public class TitleScreen extends Screen {
   @Override
   public void enter() {
     MapBuilder builder = new MapBuilder("test", 100, 100, controller.getRNG());
-    testMap = builder.setBoxes(1).setCaves(2).setWaterPct(20).build();
+    testMap = builder.setBoxes(1)
+                     .setDoorPct(100)
+                     .build();
     testCoord = testMap.getRandomFloor();
     super.enter();
   }

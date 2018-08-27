@@ -12,7 +12,7 @@ public final class GameUtils {
   }
 
   public static <T extends Comparable<T>> boolean between(T val, T low,
-      T high) {
+                                                          T high) {
     return clamp(val, low, high) == val;
   }
 }

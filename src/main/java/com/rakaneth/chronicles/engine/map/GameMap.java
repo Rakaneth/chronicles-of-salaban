@@ -35,6 +35,8 @@ public class GameMap {
         put('~', Sprite.WATER_DEEP);
         put(',', Sprite.WATER_SHALLOW);
         put(':', Sprite.BRIDGE);
+        put('+', Sprite.DOOR_CLOSED);
+        put('/', Sprite.DOOR_OPEN);
       }
     };
     gr = new GreasedRegion(tiles, '.');

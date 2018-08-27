@@ -95,7 +95,7 @@ public class Terminal extends AsciiPanel {
         wx = x + cm.x;
         wy = y + cm.y;
         s = m.getSprite(wx, wy);
-        if (s != Sprite.NONE) {
+        if (s != Sprite.NONE && s != null) {
           draw(s, x, y);
         }
       }
@@ -111,7 +111,7 @@ public class Terminal extends AsciiPanel {
       write(s.getGlyph(), x, y, s.getFG(), floor.getBG());
     }
   }
-  
+
   public void drawOnMap(Sprite s, GameMap m, Coord followPt) {
     drawOnMap(s, m, followPt, followPt);
   }

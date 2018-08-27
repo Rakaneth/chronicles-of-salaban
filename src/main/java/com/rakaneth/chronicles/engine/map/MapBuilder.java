@@ -19,7 +19,7 @@ public class MapBuilder {
 
   public MapBuilder(String ID, int width, int height, RNG rng) {
     this.ID = ID;
-    caves = 1;
+    caves = 0;
     boxes = 0;
     rounds = 0;
     waterPct = 0;
@@ -71,7 +71,7 @@ public class MapBuilder {
   }
 
   public void reset(String ID, int width, int height) {
-    caves = 1;
+    caves = 0;
     boxes = 0;
     rounds = 0;
     waterPct = 0;
@@ -92,7 +92,7 @@ public class MapBuilder {
     dng.addWater(waterPct);
     dng.addDoors(doorPct, doubleDoors);
     char[][] draft = dng.generate(base);
-    DungeonUtility.closeDoors(draft);
-    return new GameMap(ID, draft, rng);
+    char[][] finished = DungeonUtility.closeDoors(draft);
+    return new GameMap(ID, finished, rng);
   }
 }

@@ -85,10 +85,14 @@ public class GameController {
                    Action action;
                    ActionResult result;
                    action = actor.getNextAction();
+                   if (action == null) {
+                     return;
+                   }
                    while (true) {
                      result = action.perform();
                      if (result.succeeded()) {
                        actor.changeEnergy(-action.getCost());
+                       actor.setNextAction(null);
                        break;
                      } else if (result.getAlternate() != null) {
                        action = result.getAlternate();

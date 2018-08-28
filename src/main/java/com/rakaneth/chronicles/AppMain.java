@@ -70,7 +70,9 @@ public class AppMain extends JFrame implements KeyListener {
 
   public void keyPressed(KeyEvent e) {
     controller.getScreen().handleKeys(e.getKeyCode(), e.isShiftDown());
-    controller.process();
+    if (controller.player().getNextAction().isGameAction()) {
+      controller.process();
+    }
     repaint();
   }
 

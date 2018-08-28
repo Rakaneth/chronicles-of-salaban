@@ -16,7 +16,7 @@ public class Actor implements Upkeep, Comparable<Actor> {
   @Getter private String ID;
   @Getter private int energy;
   @Getter private boolean player;
-  @Getter @Setter private Action nextAction;
+  @Setter private Action nextAction;
   private static final int REQ_ACT = 10;
   @Getter @Setter private Coord pos;
   @Getter private String mapID;
@@ -103,6 +103,10 @@ public class Actor implements Upkeep, Comparable<Actor> {
 
   public void setMap(GameMap m) {
     mapID = m.getID();
+  }
+
+  public void getNextAction() {
+    if (n)
   }
 
 }

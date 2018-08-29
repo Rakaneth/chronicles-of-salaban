@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.rakaneth.chronicles.engine.map.GameMap;
 import com.rakaneth.chronicles.entity.actions.Action;
+import com.rakaneth.chronicles.entity.ai.AI;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,7 @@ public class Actor implements Upkeep, Comparable<Actor> {
   private static final int REQ_ACT = 10;
   @Getter @Setter private Coord pos;
   @Getter private String mapID;
+  @Getter private AI AI;
 
   Actor(String id, String name, boolean isPlayer) {
     ID = id;
@@ -105,8 +107,11 @@ public class Actor implements Upkeep, Comparable<Actor> {
     mapID = m.getID();
   }
 
-  public void getNextAction() {
-    if (n)
+  public Action getNextAction() {
+    if (nextAction == null && !player) {
+      nextAction = AI.chooseAction();
+    }
+    return nextAction;
   }
 
 }

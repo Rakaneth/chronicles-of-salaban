@@ -1,7 +1,6 @@
 package com.rakaneth.chronicles;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +29,7 @@ public class GameController {
   @Getter private int turns;
   private List<Actor> actors;
   private GameMap curMap;
+  private List<Actor> curActors;
 
   public GameController(Terminal map, Terminal stats, Terminal msgs,
       Terminal info) {
@@ -75,33 +75,61 @@ public class GameController {
     refresh();
   }
 
+  public void updateActors() {
+    curActors = actors.stream()
+                      .filter(f -> f.getMapID() == curMap.getID())
+                      .collect(Collectors.toList());
+  }
+
   public void process() {
     // TODO: Process stuff here
-    curActors().stream()
-               .sorted(Comparator.reverseOrder())
-               .forEach(actor -> {
-                 actor.gainEnergy();
-                 if (actor.canAct()) {
-                   Action action;
-                   ActionResult result;
-                   action = actor.getNextAction();
-                   if (action == null) {
-                     return;
-                   }
-                   while (true) {
-                     result = action.perform();
-                     if (result.succeeded()) {
-                       actor.changeEnergy(-action.getCost());
-                       actor.setNextAction(null);
-                       break;
-                     } else if (result.getAlternate() != null) {
-                       action = result.getAlternate();
-                     } else {
-                       return;
-                     }
-                   }
-                 }
-               });
+
+    Actor curActor;
+    Action curAction = null;
+    ActionResult result;
+
+    // process actions
+    while (true) {
+
+      // if Queue is empty, fill it with current actors,
+      // do upkeeps, and tick 1
+      // TODO: finish this
+
+      // add energy to actor
+      curActor.changeEnergy(curActor.getStat("Speed"));
+
+      // if actor can act, resolve action
+      if (curActor.canAct()) {
+
+        // get current actor's action, either from AI or player's intent
+        curAction = curActor.getNextAction();
+
+        // if curAction is null, game is waiting for input
+        if (curAction == null) {
+          return;
+        }
+
+        // keep trying to perform actions, using alternates at need
+        while (true) {
+          result = curAction.perform();
+          if (result.succeeded()) {
+            // action succeeded - spend energy and clear action
+            curActor.changeEnergy(-curAction.getCost());
+            curActor.setNextAction(null);
+            break;
+          } else if (result.getAlternate() != null) {
+            // got an alternate - try that next time
+            curAction = result.getAlternate();
+          }
+        }
+      }
+
+      // get next actor
+      curActor = actorQueue.poll();
+    }
+  }
+
+  private void tick() {
     ticks = (ticks + 1) % 10;
     if (ticks == 0) {
       for (Actor a : curActors()) {
@@ -116,12 +144,6 @@ public class GameController {
                  .filter(a -> a.isPlayer())
                  .findFirst()
                  .get();
-  }
-
-  private List<Actor> curActors() {
-    return actors.stream()
-                 .filter(f -> f.getMapID() == curMap.getID())
-                 .collect(Collectors.toList());
   }
 
   public void addActor(Actor a) {
